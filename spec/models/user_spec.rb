@@ -9,11 +9,6 @@ require 'rails_helper'
       it "nicknameとemail、passwordとpassword_confirmation、last_name、first_name、last_name_kana、first_name_kana、birth_dateが存在すれば登録できること" do
         expect(@user).to be_valid
       end
-      it "passwordが6文字以上であれば登録できること" do
-        @user.password = "aa11aa"
-        @user.password_confirmation = "aa11aa"
-        expect(@user).to be_valid
-      end
     end
     
     context '新規登録ができない時' do
@@ -56,10 +51,16 @@ require 'rails_helper'
         expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
       end
       it "passwordに数字がないと登録できない" do
-
+        @user.password = "aaaaaa"
+        @user.password_confirmation = "aaaaaa"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password は半角英数字混合で6文字以上入力してください。")
       end
       it "passwordが数字のみだと登録できない" do
-
+        @user.password = "111111"
+        @user.password_confirmation = "111111"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password は半角英数字混合で6文字以上入力してください。")
       end
       it "last_nameが空では登録できない" do
         @user.last_name = ""
