@@ -120,7 +120,7 @@
         <% @items.each do |item| %>
           <li class='list'>
             <div class='item-img-content'>
-            <%= link_to "new_item" do %>
+            <%= link_to item_path(item.id), method: :get do %>
               <%= image_tag item.image, class: "item-img" %>
             <% end %>
 
@@ -136,7 +136,7 @@
                 <%= item.name %>
               </h3>
               <div class='item-price'>
-                <span><%= item.value %>円<br><%= item.shipping_charge_id %></span>
+                <span><%= item.value %>円<br><%= item.shipping_charge.name %></span>
                 <div class='star-btn'>
                   <%= image_tag "star.png", class:"star-icon" %>
                   <span class='star-count'>0</span>
