@@ -1,5 +1,5 @@
 class Address < ApplicationRecord
-  belongs_to :purchase_history
+  belongs_to :purchase_form
 
   
 
