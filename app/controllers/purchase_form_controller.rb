@@ -2,15 +2,15 @@ class PurchaseFormController < ApplicationController
 
   def index
     @item = item_find
-    @purchase_form = PurchaseForm.new
+    @purchase_form_address = PurchaseFormAddress.new
   end
 
   def create
    binding.pry
-    @purchase_form = PurchaseForm.new(purchase_form_params)
+    @purchase_form_address = PurchaseFormAddress.new(purchase_form_address_params)
     
-    if @purchase_form.valid?
-      @purchase_form.save
+    if @purchase_form_address.valid?
+      @purchase_form_address.save
       return redirect_to root_path
     else
       @item = item_find
@@ -20,8 +20,8 @@ class PurchaseFormController < ApplicationController
 
   private
   
-  def purchase_form_params
-    params.require(:purchase_form).permit(:postal_code, :ship_area_id, :city, :street_number, :building_name, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id])
+  def purchase_form_address_params
+    params.require(:purchase_form_address).permit(:postal_code, :ship_area_id, :city, :street_number, :building_name, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id])
   end
 
   def item_find
