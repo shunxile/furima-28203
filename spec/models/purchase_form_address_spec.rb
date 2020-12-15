@@ -25,7 +25,7 @@ RSpec.describe PurchaseFormAddress, type: :model do
       expect(@purchase_form_address.errors.full_messages).to include("Postal code can't be blank", "Postal code 『-』を使い正しく入力してください")
     end
     it "postal_codeに『-』がないと保存できない" do
-      @purchase_form_address.postal_code = 1234567
+      @purchase_form_address.postal_code = "1234567"
       @purchase_form_address.valid?
       expect(@purchase_form_address.errors.full_messages).to include("Postal code 『-』を使い正しく入力してください")
     end
@@ -52,7 +52,7 @@ RSpec.describe PurchaseFormAddress, type: :model do
         "Phone number は半角数字で11桁以内で入力してください。")
     end
     it "phone_numberに『-』があると保存できない" do
-      @purchase_form_address.phone_number = 18-18-18
+      @purchase_form_address.phone_number =  "18-18-18"
       @purchase_form_address.valid?
       expect(@purchase_form_address.errors.full_messages).to include("Phone number は半角数字で11桁以内で入力してください。")
     end
