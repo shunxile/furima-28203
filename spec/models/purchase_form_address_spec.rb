@@ -6,7 +6,7 @@ RSpec.describe PurchaseFormAddress, type: :model do
   end
 
   context '商品購入の保存ができる時' do
-    it "postal_code・ship_area_id・city・street_number・phone_numberがあれば保存できること" do
+    it "postal_code・ship_area_id・city・street_number・phone_number・tokenがあれば保存できること" do
       expect(@purchase_form_address).to be_valid
     end
     it "building_nameが空でも保存できる" do
@@ -52,6 +52,11 @@ RSpec.describe PurchaseFormAddress, type: :model do
       @purchase_form_address.phone_number = 18-18-18
       @purchase_form_address.valid?
       expect(@purchase_form_address.errors.full_messages).to include("Phone number は半角数字で11桁以内で入力してください。")
+    end
+    it "tokenが空だと保存できない" do
+      @purchase_form_address.token = nil
+      @purchase_form_address.valid?
+      expect(@purchase_form_address.errors.full_messages).to include("Token can't be blank")
     end
   end
 
