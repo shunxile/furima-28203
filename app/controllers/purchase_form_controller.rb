@@ -1,7 +1,7 @@
 class PurchaseFormController < ApplicationController
   before_action :authenticate_user!
+  before_action :item_find
   def index
-    @item = item_find
     @purchase_form_address = PurchaseFormAddress.new
     if current_user.id == @item.user.id || @item.purchase_form != nil
       redirect_to root_path
@@ -9,15 +9,9 @@ class PurchaseFormController < ApplicationController
   end
 
   def create
-    @item = item_find
     @purchase_form_address = PurchaseFormAddress.new(purchase_form_address_params)
     if @purchase_form_address.valid?
-      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-      Payjp::Charge.create(
-        amount: @item.value,
-        card: purchase_form_address_params[:token],
-        currency: 'jpy'
-      )
+      pay
       @purchase_form_address.save
       return redirect_to root_path
     else
@@ -33,8 +27,17 @@ class PurchaseFormController < ApplicationController
   end
 
   def item_find
-    Item.find(params[:item_id])
+    @item = Item.find(params[:item_id])
   end
+
+  def pay
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+      Payjp::Charge.create(
+        amount: @item.value,
+        card: purchase_form_address_params[:token],
+        currency: 'jpy'
+      )
+    end
 end
 
 

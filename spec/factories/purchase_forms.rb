@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :purchase_form do
     
-    association :user
-    association :item
+    association :user, optional: true
+    association :item, optional: true
   end
 end

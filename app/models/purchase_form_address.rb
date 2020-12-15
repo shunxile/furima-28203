@@ -8,6 +8,8 @@ class PurchaseFormAddress
     validates :street_number
     validates :phone_number, numericality: { only_integer: true }, format: { with: /\A[0-9]{1,11}\z/, message: "は半角数字で11桁以内で入力してください。"}
     validates :token
+    validates :user_id
+    validates :item_id
   end
 
     validates :ship_area_id, presence: true, numericality: { other_than: 1 }
