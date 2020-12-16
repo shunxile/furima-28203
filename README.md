@@ -40,7 +40,7 @@ Things you may want to cover:
 
 ### Association
 - has_many :items
-- has_many :purchase_histories
+- has_many :purchase_forms
 
 ## itemsテーブル
 
@@ -57,7 +57,7 @@ Things you may want to cover:
 | user               | references | null: false |
 
 ### Association
-- has_one :purchase_history
+- has_one :purchase_form
 - belongs_to :user
 
 ## purchase_historyテーブル
@@ -82,7 +82,7 @@ Things you may want to cover:
 | street_number | string     | null: false                | 
 | building_name | string     |                            |
 | phone_number  | string     | null: false, precision: 11 | 
-| item          | references | null: false                |
+| purchase_form | references | null: false                |
 
 ### Association
-- belongs_to : purchase_history
+- belongs_to : purchase_form
