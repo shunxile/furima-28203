@@ -56,6 +56,11 @@ RSpec.describe PurchaseFormAddress, type: :model do
       @purchase_form_address.valid?
       expect(@purchase_form_address.errors.full_messages).to include("Phone number は半角数字で11桁以内で入力してください。")
     end
+    it "phone_numberが11桁以内でないと保存できない" do
+      @purchase_form_address.phone_number =  "111111111111"
+      @purchase_form_address.valid?
+      expect(@purchase_form_address.errors.full_messages).to include("Phone number は半角数字で11桁以内で入力してください。")
+    end
     it "tokenが空だと保存できない" do
       @purchase_form_address.token = nil
       @purchase_form_address.valid?
