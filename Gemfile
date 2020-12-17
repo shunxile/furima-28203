@@ -68,3 +68,4 @@ gem 'active_hash'
 gem 'mini_magick'
 gem 'payjp'
 gem 'gimei'
+gem "aws-sdk-s3", require: false
